@@ -82,11 +82,18 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    dockerfile-rails (1.5.2)
+      rails
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.12.0)
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
@@ -103,6 +110,10 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    launchy (2.5.2)
+      addressable (~> 2.8)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -166,6 +177,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    redis (5.0.6)
+      redis-client (>= 0.9.0)
+    redis-client (0.15.0)
+      connection_pool
     regexp_parser (2.8.1)
     reline (0.3.7)
       io-console (~> 0.5)
@@ -175,6 +190,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sentry-rails (5.10.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.10.0)
+    sentry-ruby (5.10.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -216,13 +236,19 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  dockerfile-rails (>= 1.5)
+  dotenv-rails
   faker (~> 3.2)
   importmap-rails
   jbuilder
+  letter_opener
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.6)
+  redis (~> 5.0)
   selenium-webdriver
+  sentry-rails (~> 5.10)
+  sentry-ruby (~> 5.10)
   sprockets-rails
   stimulus-rails
   turbo-rails
