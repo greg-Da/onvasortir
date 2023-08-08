@@ -15,9 +15,14 @@ class Event < ApplicationRecord
 
     
     has_many :attendances
-    has_many :attendants, class_name: "User", through: :attendances
+    has_many :users, through: :attendances
     belongs_to :administrator, class_name: "User", foreign_key: "administrator_id"
     
+    def end_date
+        self.start_date + self.duration.minutes
+    end
+
+    private
     def not_in_past
         if self.start_date < Time.now
             errors.add(:start_date, 'not in past')

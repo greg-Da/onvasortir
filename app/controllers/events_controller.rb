@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :is_administrator?, except: [:index, :show, :new, :create]
 
   # GET /events or /events.json
   def index
@@ -22,6 +24,7 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @event = Event.new(event_params)
+    @event.administrator = current_user
 
     respond_to do |format|
       if @event.save
@@ -66,5 +69,11 @@ class EventsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def event_params
       params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location)
+    end
+
+    def is_administrator?
+      if @event.administrator != current_user
+        redirect_to event_path(@event), notice: "You're not the administrator of the event"
+      end
     end
 end

@@ -1,10 +1,50 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag "events/show"%>
+<% end %>
+
 <p style="color: green"><%= notice %></p>
 
-<%= render @event %>
+<div class="d-flex flex-column align-items-center">
+  <h1><%= @event.title %></h1>
 
-<div>
-  <%= link_to "Edit this event", edit_event_path(@event) %> |
-  <%= link_to "Back to events", events_path %>
+  <h2 class='my-4'>Quand et où</h2>
+  <div class="bg-secondary-subtle justify-content-center  p-4 locaTime">
+    <div class="d-flex justify-content-center">
+      <i class="fa-regular fa-clock icon"></i>
+      <p class="iconLabel"><%= @event.start_date %> - <%= @event.end_date %></p>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-center">
+      <i class="fa-solid fa-globe text-center icon"></i>
+      <p class="iconLabel"><%= @event.location %></p>
+    </div>
+  </div>
 
-  <%= button_to "Destroy this event", @event, method: :delete %>
+  <div class="d-flex justify-content-around my-4">
+    <div class="mx-3" style="width: 18rem">
+      <h2 class='text-center'>Prix</h2>
+      <p  class='text-center'><%= @event.price %>€</p>
+    </div>
+
+    <div class="mx-3" style="width: 18rem">
+      <h2 class='text-center'>Participants</h2>
+      <p  class='text-center'><%= @event.users.count %></p>
+    </div>
+  </div>
+
+  <h2 class='my-4'>A propos</h2>
+  <p><%= @event.description %></p>
+
+  <h2 class='my-4'>Organisateur</h2>
+  <p><%= @event.administrator.email %></p>
+
+<% if @event.administrator == current_user %>
+  <div class="d-flex">
+    <%= link_to "Edit this event", edit_event_path(@event), class: "btn btn-primary me-3" %>
+
+    <%= button_to "Destroy this event", @event, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" } %>
+  </div>
+<% end %>
 </div>
+<%= link_to "Back to events", root_path, class: "btn btn-primary" %>
+

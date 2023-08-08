@@ -83,3 +83,4 @@ gem "sentry-ruby", "~> 5.10"
 gem "sentry-rails", "~> 5.10"
 
 gem 'dotenv-rails'
+gem "devise", "~> 4.9"

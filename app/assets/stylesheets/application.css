@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+
+ .truncate{
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.logOut{
+    margin-top: 2px;
+    color: white;
+    border: 0px;
+    background-color: transparent;
+}
