@@ -8,9 +8,9 @@ class User < ApplicationRecord
     
     validates :email, presence: true
     
-    has_many :attendances
+    has_many :attendances, dependent: :destroy
     has_many :events, through: :attendances
-    has_many :admins, class_name: "Event", foreign_key: "administrator_id"
+    has_many :admins, class_name: "Event", foreign_key: "administrator_id", dependent: :destroy
     
     
     def welcome_send

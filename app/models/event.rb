@@ -14,7 +14,7 @@ class Event < ApplicationRecord
     validates :location, presence: true
 
     
-    has_many :attendances
+    has_many :attendances, dependent: :destroy
     has_many :users, through: :attendances
     belongs_to :administrator, class_name: "User", foreign_key: "administrator_id"
     

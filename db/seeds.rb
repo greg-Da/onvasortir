@@ -11,37 +11,37 @@ Attendance.destroy_all
 Event.destroy_all
 User.destroy_all
 
-# 10.times do 
-#     User.create!(
-#         first_name: Faker::Name.first_name,
-#         last_name: Faker::Name.last_name,
-#         description: Faker::Lorem.sentence(word_count: 20),
-#         email: "#{Faker::Lorem.word}@yopmail.com",
-#     )
-# end
-# puts "User created"
+2.times do 
+    User.create!(
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        description: Faker::Lorem.sentence(word_count: 20),
+        email: "#{Faker::Lorem.word}@yopmail.com",
+    )
+end
+puts "User created"
 
-# 10.times do 
+10.times do 
     
-#     Event.create!(
-#         start_date: Faker::Date.between(from: '2024-09-23', to: '2034-09-25'),
-#         duration: 70,
-#         price: rand(1..1000),
-#         description: Faker::Lorem.sentence(word_count: 20),
-#         title: Faker::Lorem.characters(number: 10),
-#         location: Faker::Lorem.word,
-#         administrator: User.order('RANDOM()').first
-#     )
-# end
-# puts "Events created"
+    Event.create!(
+        start_date: Faker::Date.between(from: '2024-09-23', to: '2034-09-25'),
+        duration: 70,
+        price: rand(1..1000),
+        description: Faker::Lorem.sentence(word_count: 20),
+        title: Faker::Lorem.characters(number: 10),
+        location: Faker::Lorem.word,
+        administrator: User.order('RANDOM()').first
+    )
+end
+puts "Events created"
 
 
-# 10.times do 
+10.times do 
     
-#     Attendance.create!(
-#         stripe_customer_id: Faker::Lorem.word,
-#         event: Event.order('RANDOM()').first,
-#         user: User.order('RANDOM()').first
-#     )
-# end
-# puts "Attendance created"
+    Attendance.create!(
+        stripe_customer_id: Faker::Lorem.word,
+        event: Event.order('RANDOM()').first,
+        user: User.order('RANDOM()').first
+    )
+end
+puts "Attendance created"

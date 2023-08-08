@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+production link : https://eventbritethp.fly.dev/
 
-Things you may want to cover:
+Project with a user auth (signin / log in / password recovery through mail), that allows you to create events to which other user may participate.
 
-* Ruby version
+## Users
+Can be created / edited and deleted
 
-* System dependencies
+You can only connect to your own profile
 
-* Configuration
+## Events 
+Can be created / edited and deleted by their creator
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Everybody can see the index of events and their related pages 
