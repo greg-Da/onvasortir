@@ -1,0 +1,24 @@
+<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+            <%= link_to "New event", new_event_path, class: "nav-link" %>
+            </li>
+        </ul>
+            <div class="d-flex">
+            <%if !user_signed_in? %>
+                <%=link_to "S'inscrire", new_user_registration_path, class: "text-white me-3"%>
+                <%=link_to "Se connecter", new_user_session_path, class: "text-white"%>
+            <%else %>
+                <%=link_to "Profil", user_path(current_user), class: "text-white me-3 p-1 text-decoration-none"%>
+                <%= button_to "Se déconnecter", destroy_user_session_path(session[:user_id]), method: :delete,data: {turbo_method: :delete}, class: "logOut" %>
+            <%end%>
+        </div>
+        </div>
+    </div>
+</nav>

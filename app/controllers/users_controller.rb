@@ -73,7 +73,8 @@ class UsersController < ApplicationController
 
     def same_user?
       if params[:id].to_i != current_user.id
-        redirect_to user_path(current_user.id), notice: "You cannot connect to another's person profile"
+        flash[:warning] = "You cannot connect to another's person profile"
+        redirect_to user_path(current_user.id)
       end
     end
 end

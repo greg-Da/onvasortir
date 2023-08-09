@@ -1,7 +1,15 @@
 <div id="<%= dom_id attendance %>">
-  <p>
-    <strong>Stripe customer:</strong>
-    <%= attendance.stripe_customer_id %>
-  </p>
+
+  <div class="card mt-3" style="width: 18rem;">
+    <div class="card-header">
+      <p>
+        <strong>Nom:</strong>
+        <%= attendance.user.first_name %> <%= attendance.user.last_name %>
+      </p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>Email:</strong><%= attendance.user.email %></li>
+    </ul>
+  </div>
 
 </div>

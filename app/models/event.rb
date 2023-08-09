@@ -9,7 +9,7 @@ class Event < ApplicationRecord
 
     validates :description, presence: true, length: {minimum: 20 ,maximum: 1000}
 
-    validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000}
+    validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 1000}
     
     validates :location, presence: true
 
@@ -20,6 +20,10 @@ class Event < ApplicationRecord
     
     def end_date
         self.start_date + self.duration.minutes
+    end
+
+    def is_free?
+        self.price == 0 ? true : false
     end
 
     private
