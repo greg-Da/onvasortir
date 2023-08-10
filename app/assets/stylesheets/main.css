@@ -1,0 +1,14 @@
+.truncate{
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 100px;
+}
+
+.logOut{
+    margin-top: 2px;
+    color: white;
+    border: 0px;
+    background-color: transparent;
+}

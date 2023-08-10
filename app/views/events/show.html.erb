@@ -1,9 +1,12 @@
-<% content_for :head do %>
-  <%= stylesheet_link_tag "events/show"%>
-<% end %>
 
 <div class="d-flex flex-column align-items-center">
   <h1><%= @event.title %></h1>
+
+    <%if @event.picture.attached?%>
+        <%= image_tag @event.picture, alt: 'avatar', style: "width: 500px" %>
+    <%else%>
+        <p>=== Il n'y a pas encore d'avatar lié à cet utilisateur ===</p>
+    <%end%>
 
   <h2 class='my-4'>Quand et où</h2>
   <div class="bg-secondary-subtle justify-content-center  p-4 locaTime">

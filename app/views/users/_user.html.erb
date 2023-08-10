@@ -2,7 +2,12 @@
 
 <h1><%= user.first_name %> <%= user.last_name %></h1>
 
-  
+    <%if @user.avatar.attached?%>
+        <%= image_tag @user.avatar, alt: 'avatar', style: "width: 500px" %>
+    <%else%>
+        <p>=== Il n'y a pas encore d'avatar lié à cet utilisateur ===</p>
+    <%end%>
+    <br>
     <strong>Email:</strong>
     <p><%= user.email %></p>
 

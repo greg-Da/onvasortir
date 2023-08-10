@@ -86,3 +86,7 @@ gem 'dotenv-rails'
 gem "devise", "~> 4.9"
 
 gem "stripe", "~> 8.6"
+
+gem "ruby-debug-ide", "~> 0.7.3"
+
+gem "debase", "~> 0.2.4"

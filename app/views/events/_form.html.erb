@@ -43,6 +43,14 @@
   </div>
 
   <div>
+    <%= form.label :picture, style: "display: block" %>
+    <%= form.file_field :picture, 
+    placeholder: 'Upload picture',
+    direct_upload: true,
+    class: 'form-control mb-3' %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 </div>

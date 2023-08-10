@@ -26,6 +26,12 @@
         <%= f.text_field :description, autocomplete: "description", class: "form-control" %>
       </div>
 
+      <%= f.file_field :avatar,
+        placeholder: 'Upload picture',
+        autocomplete: "current-password",
+        direct_upload: true
+      %>
+
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
@@ -49,10 +55,13 @@
         <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
       </div>
 
+
       <div class="actions my-3">
         <%= f.submit "Update" %>
       </div>
   <% end %>
+
+
 
   <h3>Supprimer mon compte</h3>
 

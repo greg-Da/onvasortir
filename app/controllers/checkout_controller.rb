@@ -3,24 +3,58 @@ class CheckoutController < ApplicationController
   
     def create
         @total = params[:total].to_d
-        @session = Stripe::Checkout::Session.create(
-          payment_method_types: ['card'],
-          line_items: [
-            {
-              price_data: {
-                currency: 'eur',
-                unit_amount: (@total*100).to_i,
-                product_data: {
-                  name: 'Rails Stripe Checkout',
-                },
-              },
-              quantity: 1
+        if current_user.attendances.last.stripe_customer_id == nil
+          @session = Stripe::Checkout::Session.create(
+            metadata: {
+              event_id: params[:event_id],
             },
-          ],
-          mode: 'payment',
-          success_url: checkout_success_url + '?session_id={CHECKOUT_SESSION_ID}' + "&event_id=#{params[:event_id]}",
-          cancel_url: checkout_cancel_url + "?event_id=#{params[:event_id]}"
-        )
+            payment_method_types: ['card'],
+            customer_creation: "always", 
+            line_items: [
+              {
+                price_data: {
+                  currency: 'eur',
+                  unit_amount: (@total*100).to_i,
+                  product_data: {
+                    name: 'Rails Stripe Checkout',
+                  },
+                },
+                quantity: 1
+              },
+            ],
+            mode: 'payment',
+            success_url: checkout_success_url + '?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url: checkout_cancel_url + '?session_id={CHECKOUT_SESSION_ID}'
+          )
+
+        else
+
+          @session = Stripe::Checkout::Session.create(
+            payment_method_types: ['card'],
+            metadata: {
+              event_id: params[:event_id],
+            },
+            customer: current_user.attendances.last.stripe_customer_id,
+            line_items: [
+              {
+                price_data: {
+                  currency: 'eur',
+                  unit_amount: (@total*100).to_i,
+                  product_data: {
+                    name: 'Rails Stripe Checkout',
+                  },
+                },
+                quantity: 1
+              },
+            ],
+            mode: 'payment',
+            success_url: checkout_success_url + '?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url: checkout_cancel_url + '?session_id={CHECKOUT_SESSION_ID}'
+          )
+        end
+
+
+      
         redirect_to @session.url, allow_other_host: true
       end
     
@@ -30,14 +64,15 @@ class CheckoutController < ApplicationController
 
         flash[:success] = "Payement Effectué - vous êtes inscrit"
 
-        Attendance.create(event_id: params[:event_id], user: current_user)
-        @event = Event.find(params[:event_id])
+        Attendance.create(event_id: @session.metadata.event_id, user: current_user, stripe_customer_id: @session.customer)
+        @event = Event.find(@session.metadata.event_id)
       end
     
       def cancel
         flash[:warning] = "Payement Effectué - vous êtes inscrit"
 
-        @event = Event.find(params[:event_id])
+        @session = Stripe::Checkout::Session.retrieve(params[:session_id])
+        @event = Event.find(@session.metadata.event_id)
       end
 
 end
