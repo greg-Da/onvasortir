@@ -9,6 +9,13 @@
             <li class="nav-item">
             <%= link_to "New event", new_event_path, class: "nav-link" %>
             </li>
+            <%if  user_signed_in?%>
+                <%if  current_user.is_admin%>
+                    <li class="nav-item">
+                        <%= link_to "Admin", admins_root_path, class: "nav-link" %>
+                    </li>
+                <%end%>
+            <%end%>
         </ul>
             <div class="d-flex">
             <%if !user_signed_in? %>

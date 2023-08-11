@@ -1,0 +1,16 @@
+
+<h1>Users</h1>
+
+<%= link_to "New user", new_admins_user_path, class: "btn btn-primary" %>
+
+
+<div id="admins_users">
+  <% @users.each do |user| %>
+    <%= render user %>
+    <p>
+      <%= link_to "Show this user", admins_user_path(user) %>
+    </p>
+  <% end %>
+</div>
+
+

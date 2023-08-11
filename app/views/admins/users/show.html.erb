@@ -1,0 +1,9 @@
+
+<%= render @user %>
+
+<div>
+  <%= link_to "Edit this user", edit_admins_user_path(@user) %> |
+  <%= link_to "Back to users", admins_users_path %>
+
+  <%= button_to "Destroy this user", admins_user_path(@user), method: :delete %>
+</div>

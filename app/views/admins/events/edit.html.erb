@@ -1,0 +1,71 @@
+<h1 class="text-center">Editing event</h1>
+
+
+<%= form_with(url: admins_event_path(@event), method: "patch", scope: :event) do |form| %>
+  <% if @event.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+        <% @event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="m-auto col-8">
+  <div>
+    <%= form.label :start_date, style: "display: block" %>
+    <%= form.datetime_field :start_date, class: 'form-control mb-3' %>
+  </div>
+
+  <div>
+    <%= form.label :duration, style: "display: block" %>
+    <%= form.number_field :duration, class: 'form-control mb-3' %>
+  </div>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title, class: 'form-control mb-3' %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description, class: 'form-control mb-3' %>
+  </div>
+
+  <div>
+    <%= form.label :price, style: "display: block" %>
+    <%= form.number_field :price, class: 'form-control mb-3' %>
+  </div>
+
+  <div>
+    <%= form.label :location, style: "display: block" %>
+    <%= form.text_field :location, class: 'form-control mb-3' %>
+  </div>
+
+  <div>
+    <%= form.label :picture, style: "display: block" %>
+    <%= form.file_field :picture, 
+    placeholder: 'Upload picture',
+    direct_upload: true,
+    class: 'form-control mb-3' %>
+  </div>
+
+  <div>
+    <%= form.label :validated, style: "display: block" %>
+    <%= form.select :validated, [["", nil], ["true", true], ["false", false]], class: 'form-control mb-3' %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+</div>
+<% end %>
+
+<br>
+
+<div>
+  <%= link_to "Back", event_attendances_path(@event), class: "btn btn-primary" %>
+</div>

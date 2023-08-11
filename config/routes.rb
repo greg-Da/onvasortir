@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   end
   
   resources :users, only: [:show] 
+
+  namespace :admins do
+    root "admins#index"
+    resources :users
+    resources :events, except: [:new, :create]
+  end
   
   
   scope '/checkout' do

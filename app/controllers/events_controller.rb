@@ -2,10 +2,11 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :is_administrator?, except: [:index, :show, :new, :create]
+  before_action :is_validated?, only: [:show]
   
   # GET /events or /events.json
   def index
-    @events = Event.all
+    @events = Event.where(validated: true)
   end
   
   # GET /events/1 or /events/1.json
@@ -79,6 +80,13 @@ class EventsController < ApplicationController
     if @event.administrator != current_user
       flash[:warning] = "You're not the administrator of the event"
       redirect_to event_path(@event)
+    end
+  end
+
+  def is_validated?
+    if @event.validated == nil
+      flash[:warning] = "this event is not validated"
+      redirect_back_or_to root_path
     end
   end
 end

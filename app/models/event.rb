@@ -1,4 +1,7 @@
 class Event < ApplicationRecord
+    after_update :validation_result_send
+
+
     validate :not_in_past
     validates :start_date, presence: true
     
@@ -58,6 +61,14 @@ class Event < ApplicationRecord
             errors.add(:duration, 'Must be positve')
         elsif self.duration % 5 != 0
             errors.add(:duration, 'Must be multiple of 5')
+        end
+    end
+
+    def validation_result_send
+        if self.validated == true
+            EventMailer.validated_email(self).deliver_now
+        elsif self.validated == false
+            EventMailer.not_validated_email(self).deliver_now
         end
     end
 end
