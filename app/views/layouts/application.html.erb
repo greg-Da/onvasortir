@@ -17,13 +17,8 @@
 
   <body>
   <%= render "layouts/navbar" %>
-  <% if flash != nil %>
-    <% flash.each do |type, message| %>
-      <div class="alert alert-<%= type %>" role="alert">
-        <%=message%> 
-      </div>
-    <% end %>
-  <% end %>
+  <%= render "layouts/alert" %>
+
 
   <div class="p-3">
     <%= yield %>
